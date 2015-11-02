@@ -1,0 +1,35 @@
+<section class="oferta mini">
+	<div class="descripcion">
+		<h1><a href="{{ path('oferta', { 'ciudad': oferta.ciudad.slug, 
+			'slug' : oferta.slug }) }}">{{ oferta.nombre }}</a></h1>
+			
+		{{ oferta.descripcion | mostrar_como_lista }}
+			
+	<a class="boton" href="#">Comprar</a>
+	</div>
+	
+	<div class="estado">
+		<strong>Compras</strong>: {{ oferta.compras }}
+	</div>
+
+	<div class="faltan">
+		{% set faltan = oferta.umbral - oferta.compras %}
+		{% if faltan > 0 %}
+			Faltan <strong>{{ faltan }} compras</strong>
+			para activar la oferta
+		{% else %}
+			<strong>Oferta activada</strong> por superar las
+			<strong>{{ oferta.umbral }}</strong> compras necesarias
+		{% endif %}
+	</div> 
+        
+	<div class="galeria">
+		<img alt="Fotografía de la oferta" src="{{ asset(directorio_imagenes ~ oferta.rutaFoto) }}">
+		<p class="precio"> {{ oferta.precio }}&euro;
+		<span>{{ descuento(oferta.precio, oferta.descuento) }}</span></p>
+		<p>Disfruta de la oferta en
+		<a href="{{ path('tienda_portada', { 'ciudad': oferta.ciudad.slug, 'tienda': oferta.tienda.slug }) }}">
+		{{ oferta.tienda.nombre }}</a>
+		</p>
+	</div>
+</section>

@@ -1,0 +1,44 @@
+usuarioBundle:
+    resource: "@UsuarioBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/usuario
+    requirements:
+        _locale: en|es
+        
+# Rutas importadas del bundle BackendBundle
+BackendBundle:
+    resource: "@BackendBundle/Resources/config/routing.yml"
+    prefix:   /backend
+
+tiendaBundle:
+    resource: "@TiendaBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: en|es
+
+ciudadBundle:
+    resource: "@CiudadBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: en|es
+
+oferta:
+    resource: "@OfertaBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: en|es
+
+pagina_estatica:
+    path:     /{_locale}/sitio/{pagina}/
+    defaults: { _controller: OfertaBundle:Sitio:estatica }
+    requirements:
+        _locale: en|es
+
+portada:
+    path:     /{_locale}/{ciudad}
+    defaults: { _controller: OfertaBundle:Default:portada, ciudad: %cupon.ciudad_por_defecto%, _locale: es }
+    requirements:
+        _locale: en|es
+        
+Extranet:
+    resource: "@TiendaBundle/Resources/config/routing_extranet.yml"
+    prefix:   /extranet
